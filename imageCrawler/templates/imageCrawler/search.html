@@ -1,0 +1,12 @@
+{% include 'main_top.html' %}
+<h2>Search for some images</h2>
+<form action='/imageCrawler/search/' method='post' class='search-form'> 
+	{% csrf_token %}
+	<div class='search-field'>
+		<input type='text' name='search_query'/>
+		<span class='help'>enter a few keywords to search</span>
+		<span class='error hidden'>this field cannot be empty</span>
+	</div>
+	<input type='submit' value='Submit'/>	
+</form>
+{% include 'main_bottom.html' %}

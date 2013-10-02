@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+    <link rel="icon" type="image/ico" href="{% static 'img/favicon.png' %}"/>
+    <script type="text/javascript" src='http://codeorigin.jquery.com/jquery-1.10.2.min.js'></script>
+    <title>Image Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body background={% static 'img/background.jpg' %}>
+  	<div class='navbar navbar-inverse navbar-fixed-top'>
+  		<div class='navbar-inner'>
+  			<div class="container">
+  				<a class='brand' href='/imageCrawler/'>ImageCrawler</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href='/imageCrawler/'>Home</a></li>
+              <li><a href='/imageCrawler/search/'>Search</a></li>
+              <li><a href='/imageCrawler/queries/'>Queries</a></li>
+              <li><a href='/imageCrawler/search/'>Search</a></li>
+            </ul>
+          </div>
+  			</div>
+  		</div>
+  	</div>
+  <div class="container">
+  	<div class='content-wrapper first'>
+	    <h1>Welcome to the ImageCrawler!</h1>
+	</div>
+	<div class="content-wrapper">

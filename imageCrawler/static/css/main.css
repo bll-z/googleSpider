@@ -1,0 +1,26 @@
+body{
+	padding-top: 60px;
+}
+td{
+	padding-right:.75em;
+	padding-top:.35em;
+	border-bottom: solid .1em Maroon;
+}
+.content-wrapper{
+	background: rgba(255, 255, 255, .95);
+	padding: 1em;
+}
+.list-wrapper{
+	padding-left:2em;
+}
+.content-wrapper li{
+	display:block;
+	padding:.25em;
+	font-size: 200%;
+}
+.content-wrapper,.first{
+	margin-bottom:3em;
+}
+.hidden{
+	display:none;
+}
