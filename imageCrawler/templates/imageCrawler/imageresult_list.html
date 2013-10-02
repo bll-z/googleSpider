@@ -1,0 +1,37 @@
+{% include 'main_top.html' %}
+<h3>Your images can be viewed here:</h3>
+<div class='image-filter'>
+	<input type='text' id='filter'>
+</div>
+<div class='fake-table-wrapper'>
+<div class='row head'>
+ 	<div class='span6'>Title</div>
+ </div>
+{% for image in object_list%}
+<div class='row'>
+ 	<div class='span6 title'>
+	{%autoescape off%}
+ 		<a href="{% url image image.id %}">
+ 			{{image.title}}
+		</a>
+	{%endautoescape%}
+	</div>
+</div>
+{% endfor %}
+</div>
+<script type="text/javascript">
+	$("document").ready(function(){
+		$("#filter").on("change", function(){
+			var filterString = $(this).val().toLowerCase();
+			if(filterString!=''){
+				$(".title a").each(function(){
+					if($(this).text().html().toLowerCase().contains(filterString))
+						$(this).parents(".row").addClass("hidden");
+					else if($(this).parents(".row").hasClass("hidden"))
+						$(this).parents(".row").removeClass("hidden");
+				});
+			}
+		});
+	});
+</script>
+{% include 'main_bottom.html' %}

@@ -1,10 +1,9 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse_lazy
 from django.views.generic import TemplateView,ListView,DetailView
-from django.views.generic.edit import CreateView,UpdateView,DeleteView
+from django.views.generic.edit import DeleteView,UpdateView
 from django import template
-from imageCrawler import image_crawler
 
 from imageCrawler.models import ImageResult,ImageQuery,ImageQueryForm
 
@@ -15,39 +14,45 @@ def index(request):
 # query view
 class ImageQueryListView(ListView):
 	model = ImageQuery
-	template_name='imageCrawler/queries.html'
 	def get_query_set(self):
 		return ImageQuery.objects.all()
 
-
-# query view
-class ImageQueryView(DetailView):
-	model = ImageQuery
-	template_name = 'imageCrawler/query.html'
+class ImageResultListView(ListView):
+	model = ImageResult
+	def get_query_set(self):
+		return ImageResult.objects.all()
 
 # image view
 class ImageResultView(DetailView):
 	model = ImageResult
 	template_name = 'imageCrawler/image.html'
 
-# search view
-def searchView(request):	
+def imageQueryCreateView(request):
 	if request.method == 'POST': 
 		form = ImageQueryForm(request.POST) 
 		if form.is_valid():
 			image_query = form.save()
-			image_map = image_crawler.request(image_query.search_query)
-			for t,i in image_map.iteritems():
-				image_query.imageresult_set.create(title=t,image_file=i)
-			return HttpResponseRedirect('/imageCrawler/')
+			return HttpResponseRedirect(reverse_lazy('read', kwargs={'pk': image_query.id})) 
+		else:
+			return render(request, 'imageCrawler/imagequery_form.html', {'form':form,'fromview':True})
 	else:
-		return render(request, 'imageCrawler/search.html', {})
+		return render(request, 'imageCrawler/imagequery_form.html', {'fromview':True})
 
-class ImageQueryCreate(CreateView):
-	model = ImageQuery
+def imageQueryReadView(request, pk):
+	return render(request, 'imageCrawler/imagequery_form.html', {
+		'read_only': True,
+		'object': ImageQuery.objects.get(pk=pk),
+	})
 
-class ImageQueryUpdate(UpdateView):
-	model = ImageQuery
+class ImageQueryUpdateView(UpdateView):
+	model=ImageQuery
+	success_url=reverse_lazy('all')
 
-class ImageQueryDelete(DeleteView):
+class ImageQueryDeleteView(DeleteView):
 	model = ImageQuery
+	success_url = reverse_lazy('all')
+
+def delAll(request):
+	ImageQuery.objects.all().delete();
+	ImageResult.objects.all().delete();
+	return render(request, 'imageCrawler/index.html', {})

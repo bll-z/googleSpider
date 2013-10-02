@@ -1,1 +1,8 @@
-<img src="{{imageresult.image_url}}"/>
+{% include 'main_top.html' %}
+{% autoescape off %}
+<h3>{{imageresult.title}}</h3>
+{% endautoescape %}
+<div class='image-wrapper'>
+	<img src="{{imageresult.image_url}}"/>
+</div>
+{% include 'main_bottom.html' %}

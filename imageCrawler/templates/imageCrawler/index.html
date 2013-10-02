@@ -3,11 +3,14 @@
 <div class='list-wrapper'>
 	<ul>
 		<li>
-			<a href="/imageCrawler/search/">Search for Images</a>
+			<a href="{% url create %}">Create a Query</a>
 		</li>
 		<li>
-			<a href="/imageCrawler/queries/">View Saved Queries</a>
+			<a href="{% url all %}">View Saved Queries</a>
+		</li>
+		<li>
+			<a href="{% url imageall %}">View Saved Images Files</a>
 		</li>	
 	</ul>
 </div>
-{% include 'main_bottom.html' %}
+{% include 'main_bottom.html'%}

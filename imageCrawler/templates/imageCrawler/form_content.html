@@ -1,0 +1,26 @@
+{% if object %}
+	{% if read_only %}
+		<h3>Images for query: "{{object}}"</h3>
+	{% else %}
+		<h3>Change the query as you wish:</h3>
+	{% endif %}
+{% else %}	
+	<h3>Create a query:</h3>
+{% endif %}
+{% if not read_only%}
+	<div class='form-container'>
+		<form {% if not object %}action="{% url create %}"{% endif %} method="post">{% csrf_token %}
+		{% if form %}
+			{{form.as_p}}
+		{% else %}
+			<p>
+				<input name='search_query'/>
+			</p>	
+		{% endif %}
+		<input type='submit' value='Search'/>
+		</form>
+	</div>
+{% endif %}
+{% if read_only %}
+	{% include 'gallery.html' %}
+{% endif %}

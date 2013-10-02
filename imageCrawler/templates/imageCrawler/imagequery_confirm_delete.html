@@ -1,0 +1,9 @@
+{% include 'main_top.html' %}
+<div class='form-container'>
+	<form method="post">{% csrf_token %}
+		<h3>Are you sure you want to delete the query: "{{ object.search_query }}" ?</h3>
+		<input type="submit" value="Yes" />
+		<a href="{% url all %}"><input type="button" value="no"/></a>
+	</form>
+</div>
+{% include 'main_bottom.html' %}

@@ -1,0 +1,26 @@
+{% include 'main_top.html' %}
+<h3>Your queries can be viewed here:</h3>
+{% include 'form_content.html' %}
+ <div class='fake-table-wrapper'>
+ <div class='row head'>
+ 	<div class='span6'>Query</div>
+ 	<div class='span2'>Count</div>
+ 	<div class='span3'>Actions</div>
+ </div>
+{% for query in object_list%}
+<div class='row'>
+ 	<div class='span6'><a href="{% url read query.id %}">{{query}}</a></div>
+ 	<div class='span2'>{{query.imageresult_set.all.count}}</div>
+ 	<div class='span3'>
+ 		<a href="{% url edit query.id %}">Update</a>
+ 		<a href="{% url delete query.id %}">Delete</a>
+ 	</div>
+</div>
+{% endfor %}
+</div>
+<script type="text/javascript">
+	$("document").ready(function(){
+		$("input[type='submit']").val("Add");
+	})
+</script>
+{% include 'main_bottom.html' %}

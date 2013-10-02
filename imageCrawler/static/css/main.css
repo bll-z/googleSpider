@@ -1,14 +1,10 @@
 body{
-	padding-top: 60px;
+	padding-top: 4em;
 }
-td{
-	padding-right:.75em;
-	padding-top:.35em;
-	border-bottom: solid .1em Maroon;
-}
-.content-wrapper{
+.content-wrapper,.image-container{
 	background: rgba(255, 255, 255, .95);
 	padding: 1em;
+	overflow:hidden;
 }
 .list-wrapper{
 	padding-left:2em;
@@ -17,10 +13,14 @@ td{
 	display:block;
 	padding:.25em;
 	font-size: 200%;
+	margin-bottom:1em;
 }
 .content-wrapper,.first{
 	margin-bottom:3em;
 }
 .hidden{
 	display:none;
+}
+.row{
+	margin-bottom:2em;
 }
