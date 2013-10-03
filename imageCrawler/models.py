@@ -9,16 +9,21 @@ class ImageQuery(models.Model):
 	search_query=models.CharField("",max_length=200)
 	def __unicode__(self):
 		return self.search_query
-	def save(self, *args, **kwargs):
-		super(ImageQuery, self).save(*args, **kwargs)
-		try:
-			image_map = image_crawler.request(self.search_query)
-		except TypeError:
-			image_map = {}
+	def refresh_images(self):
+		if self.imageresult_set.all().count() > 0:
+			self.empty_images()
+		# the search fails when there is no internet
+		image_map = image_crawler.request(self.search_query)
 		for t,i in image_map.iteritems():
 			self.imageresult_set.create(title=t,image_file=i)
-		return self
-
+	def empty_images(self):
+		for image in self.imageresult_set.all():
+			image.delete()
+	def save(self, *args, **kwargs):
+		super(ImageQuery, self).save(*args, **kwargs)
+		self.refresh_images()
+		return super(ImageQuery, self).save(*args, **kwargs)
+			
 # image class
 class ImageResult(models.Model):
 	title = models.CharField(max_length=100)

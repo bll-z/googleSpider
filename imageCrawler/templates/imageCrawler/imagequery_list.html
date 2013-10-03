@@ -1,26 +1,31 @@
-{% include 'main_top.html' %}
+{% include 'main_top.html' with active='all'%}
 <h3>Your queries can be viewed here:</h3>
 {% include 'form_content.html' %}
- <div class='fake-table-wrapper'>
- <div class='row head'>
- 	<div class='span6'>Query</div>
- 	<div class='span2'>Count</div>
- 	<div class='span3'>Actions</div>
- </div>
-{% for query in object_list%}
-<div class='row'>
- 	<div class='span6'><a href="{% url read query.id %}">{{query}}</a></div>
- 	<div class='span2'>{{query.imageresult_set.all.count}}</div>
- 	<div class='span3'>
- 		<a href="{% url edit query.id %}">Update</a>
- 		<a href="{% url delete query.id %}">Delete</a>
- 	</div>
-</div>
-{% endfor %}
+ <div class='faux-table-wrapper'>
+ 	<ul class='faux-table'>
+	 <div class='row tablehead'>
+	 	<div class='span6 firstcol'><li><b>Query</b></li></div>
+	 	<div class='span2'><li><b>Count</b></li></div>
+	 	<div class='span3'><li><b>Actions</b></li></div>
+	 </div>
+	{% for query in object_list%}
+	<div class='row'>
+	 	<div class='span6 firstcol'><li><a href="{% url read query.id %}">{{query}}</a></li></div>
+	 	<div class='span2'><li>{{query.imageresult_set.all.count}}</li></div>
+	 	<div class='span3'><li>
+	 		<a href="{% url edit query.id %}">Update</a>
+	 		<a href="{% url delete query.id %}">Delete</a>
+	 	</li></div>
+	</div>
+	{% endfor %}
+	</ul>
 </div>
 <script type="text/javascript">
 	$("document").ready(function(){
+		// fix the submit button for context
 		$("input[type='submit']").val("Add");
-	})
+		// remove the second header
+		$("h3").not(":first").remove();
+	});
 </script>
 {% include 'main_bottom.html' %}

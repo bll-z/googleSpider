@@ -1,3 +1,5 @@
+// this file is unused, but it seemed usefull so I kept the code
+
 function getThumbnail(original, scale) {
 	var canvas = document.createElement("canvas");
 

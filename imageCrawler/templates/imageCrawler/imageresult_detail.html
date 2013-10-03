@@ -1,0 +1,8 @@
+{% include 'main_top.html' %}
+{% autoescape off %}
+<h3>{{imageresult.title}}</h3>
+{% endautoescape %}
+<div class='image-wrapper'>
+	<a href="{% url imageonly imageresult.id %}"><img src="{{imageresult.image_url}}"/></a>
+</div>
+{% include 'main_bottom.html' %}

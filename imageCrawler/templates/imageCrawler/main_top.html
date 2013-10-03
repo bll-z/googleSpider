@@ -15,17 +15,17 @@
   				<a class='brand' href='/imageCrawler/'>ImageCrawler</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href='/imageCrawler/'>Home</a></li>
-              <li><a href='/imageCrawler/search/'>Search</a></li>
-              <li><a href='/imageCrawler/queries/'>Queries</a></li>
-              <li><a href='/imageCrawler/search/'>Search</a></li>
+              <li {% if active == 'index' %}class='active'{% endif %}><a href='{% url index %}'>Home</a></li>
+              <li {% if active == 'create' %}class='active'{% endif %}><a href='{% url create %}'>Create</a></li>
+              <li {% if active == 'all' %}class='active'{% endif %}><a href='{% url all %}'>Queries</a></li>
+              <li {% if active == 'imageall' %}class='active'{% endif %}><a href='{% url imageall %}'>Images</a></li>
             </ul>
           </div>
   			</div>
   		</div>
   	</div>
   <div class="container">
-  	<div class='content-wrapper first'>
+  	<div class='content-wrapper first {% if not active == 'index' %}hidden{% endif %}'>
 	    <h1>Welcome to the ImageCrawler!</h1>
 	</div>
 	<div class="content-wrapper">

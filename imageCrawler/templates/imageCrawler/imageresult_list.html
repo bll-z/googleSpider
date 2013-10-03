@@ -1,32 +1,47 @@
-{% include 'main_top.html' %}
+{% include 'main_top.html' with active='imageall'%}
 <h3>Your images can be viewed here:</h3>
 <div class='image-filter'>
+	<label for='filter'>Filter Results:</label>
 	<input type='text' id='filter'>
 </div>
-<div class='fake-table-wrapper'>
-<div class='row head'>
- 	<div class='span6'>Title</div>
- </div>
-{% for image in object_list%}
-<div class='row'>
- 	<div class='span6 title'>
-	{%autoescape off%}
- 		<a href="{% url image image.id %}">
- 			{{image.title}}
-		</a>
-	{%endautoescape%}
+<div class='faux-table-wrapper'>
+	<ul class='faux-table'>
+	<div class='row head'>
+	 	<div class='span6 tablehead firstcol'><li><b>Title</b></li></div>
+	 </div>
+		{% for image in object_list%}
+			<div class='row'>
+			 	<div class='span6 title firstcol' data-title="{{image.title}}" data-keywords="{{image.queru.search_query}}">
+				{%autoescape off%}
+			 		<li><a href="{% url image image.id %}">
+			 			{{image.title}}
+					</a></li>
+				{%endautoescape%}
+				</div>
+			</div>
+		{% endfor %}
+	<ul>
 	</div>
-</div>
-{% endfor %}
-</div>
 <script type="text/javascript">
+	// set the functionality for the filter box
 	$("document").ready(function(){
-		$("#filter").on("change", function(){
+		// filter to the input
+		$("#filter").on("keyup", function(){
+			// lowercase to random caps doesnt mess things up
 			var filterString = $(this).val().toLowerCase();
 			if(filterString!=''){
-				$(".title a").each(function(){
-					if($(this).text().html().toLowerCase().contains(filterString))
+				// grab the title div
+				// it has the original keywords at data-keywords
+				// and the title at data-title
+				$(".title").each(function(){
+					var infoString= $(this).attr('data-title') + " " +
+						$(this).attr("data-keywords");
+					infoString = infoString.toLowerCase();
+					// if not a match
+					if(infoString.indexOf(filterString)<0)
+						// hide
 						$(this).parents(".row").addClass("hidden");
+					// else show
 					else if($(this).parents(".row").hasClass("hidden"))
 						$(this).parents(".row").removeClass("hidden");
 				});

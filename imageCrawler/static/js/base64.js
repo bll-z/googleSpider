@@ -1,3 +1,5 @@
+// this file is unused, but it seemed usefull so I kept the code
+
 var keyStr = "ABCDEFGHIJKLMNOP" +
 			"QRSTUVWXYZabcdef" +
 			"ghijklmnopqrstuv" +

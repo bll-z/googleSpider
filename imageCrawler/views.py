@@ -25,7 +25,6 @@ class ImageResultListView(ListView):
 # image view
 class ImageResultView(DetailView):
 	model = ImageResult
-	template_name = 'imageCrawler/image.html'
 
 def imageQueryCreateView(request):
 	if request.method == 'POST': 
@@ -56,3 +55,7 @@ def delAll(request):
 	ImageQuery.objects.all().delete();
 	ImageResult.objects.all().delete();
 	return render(request, 'imageCrawler/index.html', {})
+
+def imageResultOnly(request, pk):
+	image = ImageResult.objects.get(pk=pk)
+	return render(request, 'imageCrawler/imageresult.html', {'image':image})
