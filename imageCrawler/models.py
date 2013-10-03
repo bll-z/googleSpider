@@ -6,7 +6,7 @@ from imageCrawler import image_crawler
 
 # query class
 class ImageQuery(models.Model):
-	search_query=models.CharField("",max_length=200)
+	search_query=models.CharField("",unique=True,max_length=200)
 	def __unicode__(self):
 		return self.search_query
 	def refresh_images(self):

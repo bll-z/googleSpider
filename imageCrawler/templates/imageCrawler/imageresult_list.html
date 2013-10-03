@@ -29,23 +29,21 @@
 		$("#filter").on("keyup", function(){
 			// lowercase to random caps doesnt mess things up
 			var filterString = $(this).val().toLowerCase();
-			if(filterString!=''){
-				// grab the title div
-				// it has the original keywords at data-keywords
-				// and the title at data-title
-				$(".title").each(function(){
-					var infoString= $(this).attr('data-title') + " " +
-						$(this).attr("data-keywords");
-					infoString = infoString.toLowerCase();
-					// if not a match
-					if(infoString.indexOf(filterString)<0)
-						// hide
-						$(this).parents(".row").addClass("hidden");
-					// else show
-					else if($(this).parents(".row").hasClass("hidden"))
-						$(this).parents(".row").removeClass("hidden");
-				});
-			}
+[			// grab the title div
+			// it has the original keywords at data-keywords
+			// and the title at data-title
+			$(".title").each(function(){
+				var infoString= $(this).attr('data-title') + " " +
+					$(this).attr("data-keywords");
+				infoString = infoString.toLowerCase();
+				// if not a match
+				if(infoString.indexOf(filterString)<0)
+					// hide
+					$(this).parents(".row").addClass("hidden");
+				// else show
+				else if($(this).parents(".row").hasClass("hidden"))
+					$(this).parents(".row").removeClass("hidden");
+			});]
 		});
 	});
 </script>

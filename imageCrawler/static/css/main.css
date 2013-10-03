@@ -12,15 +12,11 @@ input[type='text']{
 	background: rgba(255, 255, 255, .95);
 	padding: 1em;
 	overflow:hidden;
-	height:50%;
 }
 .content-wrapper li{
 	padding:.25em;
 	display:block;
-	font-size: 200%;
-}
-.container{
-	height:auto;
+	font-size: 200%;	
 }
 .faux-table li{
 	border-right: solid black .1em;
