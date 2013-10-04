@@ -29,7 +29,7 @@
 		$("#filter").on("keyup", function(){
 			// lowercase to random caps doesnt mess things up
 			var filterString = $(this).val().toLowerCase();
-[			// grab the title div
+			// grab the title div
 			// it has the original keywords at data-keywords
 			// and the title at data-title
 			$(".title").each(function(){
@@ -43,7 +43,7 @@
 				// else show
 				else if($(this).parents(".row").hasClass("hidden"))
 					$(this).parents(".row").removeClass("hidden");
-			});]
+			});
 		});
 	});
 </script>
